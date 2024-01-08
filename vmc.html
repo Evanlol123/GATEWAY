@@ -1,0 +1,96 @@
+<a href = "/index.html">
+  Home
+</a>
+<a href = "/exploits.html">
+  Other Exploits
+</a>
+<h1>
+  Disabling Extensions Using Crosh/Vmc
+</h1>
+<h3> 
+  There are two variations to this method:
+</h3>
+<ol>
+    <li>
+      Disabling all extensions. This is probably the most reliable, but you'd be left without useful extensions such as any adblockers. 
+      You also aren't able to install anything from the Chrome Web Store either.
+    </li>
+  
+    <li>
+      Disabling specific extensions. This is less reliable, since this only becomes possible once Chrome OS has installed at least one extension already, 
+      which could be one that you're trying to disable.
+    </li>
+</ol>
+<h3>
+  Instructions:
+</h3>
+<ol>
+  <li>
+    Back up any data you want before the powerwash.
+  </li>  
+  <li>If you're doing the second variation, note down any extension IDs. You may also want to do this if you intend on disabling all extensions, 
+      since sometimes that will fail and require you to specify each extension you want to disable.
+  </li>
+  <li>
+    Powerwash by attempting to enable developer mode. (ctrl + esc + powerbutton then ctrl + d then enter then enter) 
+  </li>
+  <li>
+    Log into your Google account as normal, but immediately disable your internet right after you sign in.
+  </li>
+  <li>
+    You should be logged into your account, but without any extensions installed due to being offline.
+  </li> 
+  <li>
+    Here the instructions are split, so follow the one for the method that you want to do.
+  </li>
+</ol>
+<h3>
+  Disable All Extensions:
+</h3>
+<ol>
+  <li>
+    Open up crosh by hitting ctr+alt+t.
+  </li>
+  <li> 
+    Type in vmc create-extra-disk --size 1 /home/chronos/user/Extensions
+  </li>
+  <li>
+    Run that command.
+  </li>
+  <li>
+    If it fails with a "file exists" error, then you must individually specify each extension that you want to remove. Move to step 5 of the next section to do that.
+  </li>
+  <li>
+    Re-enable your internet, and no extensions should be installed.
+  </li>
+</ol>
+<h3>
+  Disable Specific Extensions:
+</h3>
+
+<ol>
+  <li>
+    Navigate to chrome://extensions.
+  </li>
+  <li>
+    Enable your internet, and immediately disable it when an extension is installed.
+  </li>
+  <li>
+    Assuming the installed extension was not one that you were trying to enable, move on to step 4. If it was, you'd have to powerwash to try again.
+  </li>
+  <li>
+    Open up crosh by hitting ctr+alt+t.
+  </li>
+  <li>
+    For each extension you want to disable, run this command: vmc create-extra-disk --size 1 /home/chronos/user/Extensions/{extension_id}
+  </li>
+  <li>
+    Each command should look something like this: vmc create-extra-disk --size 1 /home/chronos/user/Extensions/cjpalhdlnbpafiamejdnhcphjbkeiagm
+  </li>
+  <li>
+    Re-enable your internet, and if you typed/pasted in the extension IDs correctly, those specific extensions should be blocked from ever being installed.
+  </li>
+</ol>
+<p>
+  All credit goes to vk6#7391. This has been tested and works on v112-v119.
+</p>
